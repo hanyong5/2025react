@@ -1,25 +1,29 @@
-import logo from "./logo.svg";
+import React from "react";
 import "./App.css";
 
 function App() {
-  const test = "안녕하세요";
-  const style = {
-    color: "blue",
-  };
-
-  const testFn = () => {
-    console.log("testFn1");
-  };
-  // function testFn() {
-  //   console.log("testFn");
-  // }
   return (
     <div>
-      <h3 style={{ color: "red" }}>test</h3>
-      {test}
-      {testFn()}
-      <img src={logo} alt="" />
-      <img src="images/logo.svg" alt="" />
+      App
+      <ModalView />
+    </div>
+  );
+}
+
+function ModalView() {
+  return (
+    <div className="modal">
+      <div className="modalContent">
+        <div className="titleWrap">
+          <h3>title</h3>
+          <div>X</div>
+        </div>
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat,
+          illum.
+        </p>
+        <button className="closeBtn">닫기</button>
+      </div>
     </div>
   );
 }
