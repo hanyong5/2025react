@@ -1,29 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
+import ModalView from "./components/ModalView";
 
 function App() {
+  let [data, setData] = useState(false);
+  let [num, setNum] = useState(1);
+  let [arr, setArr] = useState(["사과", "배"]);
+
+  function modiData() {
+    setData(true);
+  }
+
   return (
     <div>
-      App
-      <ModalView />
-    </div>
-  );
-}
-
-function ModalView() {
-  return (
-    <div className="modal">
-      <div className="modalContent">
-        <div className="titleWrap">
-          <h3>title</h3>
-          <div>X</div>
-        </div>
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat,
-          illum.
-        </p>
-        <button className="closeBtn">닫기</button>
-      </div>
+      {num} / {arr[0]}
+      {data ? <ModalView /> : null}
+      <button onClick={modiData}>모달클릭</button>
+      <button
+        onClick={() => {
+          setNum(num + 1);
+        }}
+      >
+        숫자변경
+      </button>
     </div>
   );
 }
