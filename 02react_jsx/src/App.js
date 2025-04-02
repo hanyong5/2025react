@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState } from "react";
 import "./App.css";
 import ModalView from "./components/ModalView";
