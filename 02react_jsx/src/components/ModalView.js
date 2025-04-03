@@ -2,7 +2,7 @@ import React from "react";
 // import "../App.css";
 import "../assets/css/style.scss";
 
-function ModalView() {
+function ModalView({ closeChildModal }) {
   return (
     <div className="modal view">
       <div className="modalContent">
@@ -14,7 +14,9 @@ function ModalView() {
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Placeat,
           illum.
         </p>
-        <button className="closeBtn">닫기</button>
+        <button className="closeBtn" onClick={closeChildModal}>
+          닫기
+        </button>
       </div>
     </div>
   );

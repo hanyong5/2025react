@@ -12,10 +12,14 @@ function App() {
     setData(true);
   }
 
+  function closeModal() {
+    setData(false);
+  }
+
   return (
     <div>
       {num} / {arr[0]}
-      {data ? <ModalView /> : null}
+      {data ? <ModalView closeChildModal={closeModal} /> : null}
       <button onClick={modiData}>모달클릭</button>
       <button
         onClick={() => {

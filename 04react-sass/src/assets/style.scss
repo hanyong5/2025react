@@ -1,0 +1,59 @@
+$main-color: #a5dc0c;
+$font-basic-size: 20px;
+$basic-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+$radius: 5px;
+
+ul,
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.test {
+  background-color: $main-color;
+  font-size: $font-basic-size;
+  padding: 10px;
+}
+
+// .hd {
+//   background-color: skyblue;
+//   display: flex;
+// }
+
+// .hd .menu {
+//   display: flex;
+// }
+
+.hd {
+  _background-color: pink;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: $basic-shadow;
+  padding: 0 16px;
+  border-radius: $radius;
+  .menu {
+    display: flex;
+    _background-color: yellow;
+    li {
+      _background: green;
+    }
+    a {
+      display: block;
+      height: 100%;
+      _background-color: blue;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+
+      &.active {
+        background: blue;
+        color: white;
+      }
+      &:hover {
+        background-color: pink;
+        color: white;
+      }
+    }
+  }
+}
