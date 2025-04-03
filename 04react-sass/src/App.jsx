@@ -1,43 +1,74 @@
-import React from "react";
-import "./assets/style.scss";
+import React, { useState } from "react";
+import "./assets/vdata.scss";
+import ModalComp from "./components/ModalComp";
 
 function App() {
+  // const vData = [
+  //   "1.Lorem, ipsum dolor sit amet ",
+  //   "2.consectetur adipisicing elit. Quaerat et ",
+  //   "3.placeat, veritatis dolore qui praesentium!",
+  // ];
+  const vData = [
+    {
+      title: "1.Lorem, ipsum dolor sit amet ",
+      content:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quia? Dolorem quaerat ipsa praesentium suscipit aliquam cumque a illum? Molestias.",
+    },
+    {
+      title: "2.Lorem, ipsum dolor sit amet ",
+      content:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quia? Dolorem quaerat ipsa praesentium suscipit aliquam cumque a illum? Molestias.",
+    },
+    {
+      title: "3.Lorem, ipsum dolor sit amet ",
+      content:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos, quia? Dolorem quaerat ipsa praesentium suscipit aliquam cumque a illum? Molestias.",
+    },
+  ];
+
+  // const [vdata,setVData] = useState([
+  //   "1.Lorem, ipsum dolor sit amet ",
+  //   "2.consectetur adipisicing elit. Quaerat et ",
+  //   "3.placeat, veritatis dolore qui praesentium!",
+  // ])
+
+  const [num, setNum] = useState(0);
+  const [view, setView] = useState(false);
+
+  function vModal(index) {
+    setView(true);
+    // alert(index);
+    setNum(index);
+  }
+
+  function vModalClose() {
+    setView(false);
+  }
+
   return (
     <>
-      <div className="container hd">
-        <h1>
-          <a href="#" className="nav-link">
-            logo
-          </a>
-        </h1>
-        <ul className="menu">
-          <li>
-            <a href="#" className="nav-link">
-              menu1
-            </a>
-          </li>
-          <li>
-            <a href="#" className="nav-link active">
-              menu2
-            </a>
-          </li>
-          <li>
-            <a href="#" className="nav-link">
-              menu3
-            </a>
-          </li>
-          <li>
-            <a href="#" className="nav-link">
-              menu4
-            </a>
-          </li>
-          <li>
-            <a href="#" className="nav-link">
-              menu5
-            </a>
-          </li>
-        </ul>
-      </div>
+      <h2>testView{num}</h2>
+      {/* {vData.map((item,i)=>{})} */}
+
+      <ul className="lists">
+        {vData.map((item, i) => {
+          return (
+            <>
+              <li
+                onClick={() => {
+                  vModal(i);
+                }}
+              >
+                {item.title}
+              </li>
+            </>
+          );
+        })}
+      </ul>
+
+      {view ? (
+        <ModalComp closeEvent={vModalClose} sendVData={vData} sendNum={num} />
+      ) : null}
     </>
   );
 }
