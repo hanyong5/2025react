@@ -46,7 +46,6 @@ function App() {
 
     const newTodo = {
       id: Date.now(),
-      // id:crypto.randomUUID()
       text: input,
       completed: false,
     };
@@ -56,20 +55,11 @@ function App() {
     setInput("");
   }
 
-  function toggleTodo(id) {
-    // alert("toggle : " + id);
-    setTodoList(
-      todoList.map((item) => {
-        // {}
-        return item.id === id ? { ...item, completed: !item.completed } : item;
-      })
-    );
-  }
-
   return (
     <>
       <div className="p-4 border w-[500px] m-auto mt-12">
         <h1 className="text-2xl font-bold mb-4 text-center">TODO app</h1>
+
         <div className="flex gap-2">
           <input
             type="text"
@@ -108,9 +98,6 @@ function App() {
                 <>
                   <li className="flex justify-between items-center py-4 border-b">
                     <span
-                      onClick={() => {
-                        toggleTodo(item.id);
-                      }}
                       style={{
                         textDecoration: item.completed
                           ? "line-through"
