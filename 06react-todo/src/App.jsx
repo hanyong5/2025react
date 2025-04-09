@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import TodoItem from "./components/TodoItem";
 
 function App() {
   const todos = [
@@ -60,7 +61,6 @@ function App() {
     // alert("toggle : " + id);
     setTodoList(
       todoList.map((item) => {
-        // {}
         return item.id === id ? { ...item, completed: !item.completed } : item;
       })
     );
@@ -103,33 +103,17 @@ function App() {
           </li> */}
           {
             // todos.map(()=>{})
-            todoList.map((item) => {
+            todoList.map((item, i) => {
               return (
-                <>
-                  <li className="flex justify-between items-center py-4 border-b">
-                    <span
-                      onClick={() => {
-                        toggleTodo(item.id);
-                      }}
-                      style={{
-                        textDecoration: item.completed
-                          ? "line-through"
-                          : "none",
-                        color: item.completed ? "red" : "black",
-                      }}
-                    >
-                      {item.text}
-                    </span>
-                    <button
-                      className="text-red-500 text-sm hover:underline"
-                      onClick={() => {
-                        deleteTodo(item.id);
-                      }}
-                    >
-                      삭제
-                    </button>
-                  </li>
-                </>
+                <TodoItem
+                  key={i}
+                  item={
+                    todoList[i]
+                    // item
+                  }
+                  toggleTodo1={toggleTodo}
+                  deleteTodo={deleteTodo}
+                />
               );
             })
           }
