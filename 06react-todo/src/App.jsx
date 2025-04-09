@@ -1,27 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TodoItem from "./components/TodoItem";
 
 function App() {
-  const todos = [
-    {
-      id: 1,
-      text: "react 공부하기",
-      completed: true,
-    },
-    {
-      id: 2,
-      text: "spring 공부하기",
-      completed: false,
-    },
-    {
-      id: 3,
-      text: "운동하기",
-      completed: false,
-    },
-  ];
+  // const todos = [
+  //   {
+  //     id: 1,
+  //     text: "react 공부하기",
+  //     completed: true,
+  //   },
+  //   {
+  //     id: 2,
+  //     text: "spring 공부하기",
+  //     completed: false,
+  //   },
+  //   {
+  //     id: "3",
+  //     text: "운동하기",
+  //     completed: "false",
+  //   },
+  // ];
 
   const [input, setInput] = useState("");
-  const [todoList, setTodoList] = useState([...todos]);
+  const [todoList, setTodoList] = useState([]);
+
+  useEffect(() => {
+    const store = localStorage.getItem("todo");
+    if (store) {
+      setTodoList(JSON.parse(store));
+    }
+    console.log("useEffect1");
+  }, []);
+
+  // useEffect(함수, 배열)
+  // 함수 :프로그램실행, 배열없으면 상태들변화에 실행
+  // 배열 [] 있으면 1번실행
+  // []
+
+  useEffect(() => {
+    console.log("todoList변화");
+    localStorage.setItem("todo", JSON.stringify(todoList));
+  }, [todoList]);
 
   function deleteTodo(id) {
     // alert("todo : " + id);
