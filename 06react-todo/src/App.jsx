@@ -34,7 +34,7 @@ function App() {
   // useEffect(함수, 배열)
   // 함수 :프로그램실행, 배열없으면 상태들변화에 실행
   // 배열 [] 있으면 1번실행
-  // []
+  // [test1, test2, test3] state의 변화에 따라 useEffect실행
 
   useEffect(() => {
     console.log("todoList변화");
