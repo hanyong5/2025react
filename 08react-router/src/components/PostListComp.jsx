@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import NavComp from "./NavComp";
 import FooterComp from "./FooterComp";
+import { Link } from "react-router-dom";
 
 function PostListComp() {
   const [postData, setPostData] = useState([]);
@@ -29,7 +30,12 @@ function PostListComp() {
         <h3>글리스트</h3>
         <ul>
           {postData.map((item, i) => {
-            return <li key={i}>{item.title}</li>;
+            return (
+              <li key={i} className="flex justify-between">
+                <Link to={`/view/${item.id}`}>{item.title}</Link>
+                <button>댓글보기</button>
+              </li>
+            );
           })}
         </ul>
       </div>
