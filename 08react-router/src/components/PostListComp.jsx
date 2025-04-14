@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import NavComp from "./NavComp";
+import FooterComp from "./FooterComp";
 
 function PostListComp() {
   const [postData, setPostData] = useState([]);
@@ -22,7 +23,7 @@ function PostListComp() {
     fetchData();
   }, []);
   return (
-    <div>
+    <>
       <NavComp />
       <div className="container m-auto">
         <h3>글리스트</h3>
@@ -32,7 +33,8 @@ function PostListComp() {
           })}
         </ul>
       </div>
-    </div>
+      <FooterComp />
+    </>
   );
 }
 
