@@ -33,7 +33,9 @@ function PostListComp() {
             return (
               <li key={i} className="flex justify-between">
                 <Link to={`/view/${item.id}`}>{item.title}</Link>
-                <button>댓글보기</button>
+                <div>
+                  <Link to={`/view/${item.id}/comment`}>댓글보기</Link>
+                </div>
               </li>
             );
           })}

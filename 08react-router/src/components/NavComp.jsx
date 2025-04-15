@@ -10,6 +10,7 @@ function NavComp() {
         <Link to="/">HOME</Link>
         <Link to="/list">LIST</Link>
         <Link to="/view/1">VIEW</Link>
+        <Link to="/view/1/comment">댓글보기</Link>
       </div>
     </div>
   );
