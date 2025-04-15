@@ -6,40 +6,81 @@ import { Link } from "react-router-dom";
 
 function PostListComp() {
   const [postData, setPostData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const listCnt = 10;
 
   useEffect(() => {
     async function fetchData() {
-      const pData = await axios("https://jsonplaceholder.typicode.com/posts");
-      // const uData = await axios("https://jsonplaceholder.typicode.com/users");
+      try {
+        const pData = await axios("https://jsonplaceholder.typicode.com/posts");
+        console.log(pData.data);
 
-      // const unit = pData.data.map((item) => {
-      //   const user = uData.data.find((user) => user.id === item.userId);
-      //   return {
-      //     ...item,
-      //     name: user ? user.username : "nodata",
-      //   };
-      // });
-      setPostData(pData.data);
+        setPostData(pData.data);
+      } catch (error) {
+        console.error("실패" + error);
+      } finally {
+        setLoading(false);
+      }
     }
     fetchData();
   }, []);
+
+  const lastItem = currentPage * listCnt; //10
+  const firstItem = lastItem - listCnt; //0
+
+  const currentItem = postData.slice(firstItem, lastItem);
+
+  const totalPages = Math.ceil(postData.length / listCnt);
+
+  console.log(firstItem, lastItem, currentItem, totalPages);
+
+  function gotoPage(page) {
+    // alert(page);
+    if (totalPages >= page) {
+      setCurrentPage(page);
+    }
+  }
+
   return (
     <>
       <NavComp />
       <div className="container m-auto">
         <h3>글리스트</h3>
         <ul>
-          {postData.map((item, i) => {
-            return (
-              <li key={i} className="flex justify-between">
-                <Link to={`/view/${item.id}`}>{item.title}</Link>
-                <div>
-                  <Link to={`/view/${item.id}/comment`}>댓글보기</Link>
-                </div>
-              </li>
-            );
-          })}
+          {loading ? (
+            <p>데이터준비중입니다</p>
+          ) : (
+            <>
+              {currentItem.map((item, i) => {
+                return (
+                  <li key={i} className="flex justify-between px-4">
+                    <Link to={`/view/${item.id}`}>{item.title}</Link>
+                    {/* <div>
+                      <Link to={`/view/${item.id}/comment`}>댓글보기</Link>
+                    </div> */}
+                  </li>
+                );
+              })}
+            </>
+          )}
         </ul>
+        <div className="flex justify-center items-center gap-3 py-4">
+          <button className="px-3 py-1 bg-gray-300 rounded hover:bg-gray-400">
+            이전
+          </button>
+          <span>
+            페이지 {currentPage} / {totalPages}
+          </span>
+          <button
+            onClick={() => {
+              gotoPage(currentPage + 1);
+            }}
+            className="px-3 py-1 bg-gray-300 rounded hover:bg-gray-400"
+          >
+            다음
+          </button>
+        </div>
       </div>
       <FooterComp />
     </>

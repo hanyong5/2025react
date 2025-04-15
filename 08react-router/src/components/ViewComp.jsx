@@ -72,6 +72,7 @@ function ViewComp() {
         </div>
       )}
 
+      <CommentComp />
       <FooterComp />
     </>
   );

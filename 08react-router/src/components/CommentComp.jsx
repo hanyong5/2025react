@@ -15,15 +15,12 @@ function CommentComp() {
       setComments(res.data);
     }
     viewComment();
-  });
+  }, []);
 
   return (
     <div>
       <div className="container m-auto">
-        <NavComp />
-        <h3>
-          댓글보기 : {id} / <Link to="/list">목록으로 이동</Link>
-        </h3>
+        <h3>댓글보기 : {id}</h3>
         <ul className="space-y-4">
           {comments.map((comment) => (
             <li key={comment.id} className="border p-3 rounded shadow">
