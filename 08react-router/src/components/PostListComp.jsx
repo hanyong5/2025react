@@ -6,87 +6,31 @@ import { Link } from "react-router-dom";
 
 function PostListComp() {
   const [postData, setPostData] = useState([]);
-  const listCnt = 10;
-  const [totalPages, setTotalPages] = useState(1);
-  const [currentPage, setCurrentPage] = useState(1);
-
-  async function postListData() {
-    // const resData1 = await axios("",{params:{_page:-,_limit:-}})
-
-    const resData = await axios("https://jsonplaceholder.typicode.com/posts", {
-      params: {
-        _page: currentPage,
-        _limit: listCnt,
-      },
-    });
-    console.log(resData.data);
-    console.log(resData.headers["x-total-count"]);
-    const totalPages = Math.ceil(resData.headers["x-total-count"] / listCnt);
-    setTotalPages(totalPages);
-    setPostData(resData.data);
-  }
 
   useEffect(() => {
-    postListData();
-  }, [currentPage]);
+    async function fetchData() {
+      const pData = await axios.get("http://localhost:8080/test");
 
+      setPostData(pData.data);
+    }
+    fetchData();
+  }, []);
   return (
     <>
       <NavComp />
-      <div className="container mx-auto">
-        test - {currentPage} / {totalPages}
+      <div className="container m-auto">
+        <h3>글리스트</h3>
         <ul>
           {postData.map((item, i) => {
-            return <li>{item.title}</li>;
+            return (
+              <li key={i} className="flex justify-between">
+                <Link to={`/view/${item.id}`}>
+                  {item.title} / {item.name} / {item.email}
+                </Link>
+              </li>
+            );
           })}
         </ul>
-        {/* <div className="flex justify-center gap-4 py-4">
-          <span
-            onClick={() => {
-              setCurrentPage(1);
-            }}
-          >
-            1
-          </span>
-          <span
-            onClick={() => {
-              setCurrentPage(2);
-            }}
-          >
-            2
-          </span>
-          <span
-            onClick={() => {
-              setCurrentPage(3);
-            }}
-          >
-            3
-          </span>
-        </div> */}
-        <div className="pagination flex justify-center gap-4 py-4 items-center">
-          <button
-            onClick={() => {
-              setCurrentPage(currentPage - 1);
-            }}
-            disabled={currentPage == 1}
-            className="px-3 py-1 bg-gray-300 rounded hover:bg-gray-400 disabled:opacity-40"
-          >
-            이전
-          </button>
-          {/* 페이지 */}
-          <div>
-            {currentPage} / {totalPages}
-          </div>
-          <button
-            onClick={() => {
-              setCurrentPage(currentPage + 1);
-            }}
-            disabled={currentPage == totalPages}
-            className="px-3 py-1 bg-gray-300 rounded hover:bg-gray-400 disabled:opacity-40"
-          >
-            다음
-          </button>
-        </div>
       </div>
       <FooterComp />
     </>
