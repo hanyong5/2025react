@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { getList } from "../api/testImageApi";
+import dayjs from "dayjs";
 
 function ListComp() {
   const [testData, setTestData] = useState([]);
   const size = 5;
   const [page, setPage] = useState(0);
+  const [totalElements, setTotalElements] = useState(0);
 
   useEffect(() => {
     // async function listData() {
@@ -20,6 +22,7 @@ function ListComp() {
     getList({ page, size }).then((data) => {
       console.log(data);
       setTestData(data.content);
+      setTotalElements(data.totalElements);
     });
   }, []);
 
@@ -29,7 +32,14 @@ function ListComp() {
       <hr />
       <ul>
         {testData.map((item, i) => {
-          return <li>{item.title}</li>;
+          return (
+            <li>
+              <span>{totalElements - (page * size + i)}</span>
+              <span>{item.title}</span>
+              <span>{item.name}</span>
+              <span>{dayjs(item.startdate).format("YYYY-MM-DD")}</span>
+            </li>
+          );
         })}
       </ul>
     </div>
