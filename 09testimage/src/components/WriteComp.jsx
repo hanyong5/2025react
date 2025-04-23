@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 const initState = {
   title: "",
@@ -14,8 +15,8 @@ function WriteComp() {
     e.preventDefault();
 
     if (title == "") {
-      alert("title을 입력하세요");
-
+      // alert("title을 입력하세요");
+      toast.error("제목을 입력하세요");
       document.querySelector("input[name='title']").focus();
     }
   }
@@ -26,6 +27,8 @@ function WriteComp() {
 
   return (
     <div className="px-4">
+      <ToastContainer />
+
       <h3 className="text-bold">글작성</h3>
 
       <form onSubmit={handleSubmit}>
