@@ -11,6 +11,7 @@ const initState = {
 
 function WriteComp() {
   const [testImageAdd, setTestImageAdd] = useState({ ...initState });
+
   // const [title, setTitle] = useState("");
   // const [name, setName] = useState("");
 
@@ -52,6 +53,10 @@ function WriteComp() {
     formData.append("name", testImageAdd.name);
     formData.append("content", testImageAdd.content);
 
+    if (testImageAdd.files) {
+      formData.append("files", testImageAdd.files[0]);
+    }
+
     try {
       const result = postAdd(formData);
       console.log(result);
@@ -73,6 +78,12 @@ function WriteComp() {
     setTestImageAdd({
       ...testImageAdd,
       [name]: value,
+    });
+  }
+  function handleFileChange(e) {
+    setTestImageAdd({
+      ...testImageAdd,
+      files: e.target.files,
     });
   }
 
@@ -133,6 +144,7 @@ function WriteComp() {
             name="files"
             className="border rounded w-full p-2"
             id="files"
+            onChange={handleFileChange}
           />
         </div>
         <div className="flex justify-end">

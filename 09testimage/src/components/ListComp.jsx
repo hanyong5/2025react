@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getList } from "../api/testImageApi";
 import dayjs from "dayjs";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function ListComp() {
   const [testData, setTestData] = useState([]);
@@ -53,6 +53,12 @@ function ListComp() {
             <li className="flex justify-between py-4 hover:bg-gray-100 px-4 border rounded mb-3">
               <div className="flex gap-3">
                 <span className="w-4">{totalElements - (page * size + i)}</span>
+                <span>
+                  <img
+                    src={`http://localhost:8080/images/thumb_${item.imageFileNames}`}
+                    alt=""
+                  />
+                </span>
                 <span>{item.title}</span>
               </div>
               <div className="flex gap-3">
