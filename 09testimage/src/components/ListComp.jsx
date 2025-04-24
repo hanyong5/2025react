@@ -54,10 +54,11 @@ function ListComp() {
               <div className="flex gap-3">
                 <span className="w-4">{totalElements - (page * size + i)}</span>
                 <span>
-                  <img
-                    src={`http://localhost:8080/images/thumb_${item.imageFileNames}`}
-                    alt=""
-                  />
+                  {item.imageFileNames && (
+                    <img
+                      src={`http://localhost:8080/images/thumb_${item.imageFileNames}"`}
+                    />
+                  )}
                 </span>
                 <span>{item.title}</span>
               </div>

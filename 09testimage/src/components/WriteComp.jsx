@@ -17,7 +17,7 @@ function WriteComp() {
 
   const navigate = useNavigate();
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     // if (title == "") {
@@ -58,9 +58,11 @@ function WriteComp() {
     }
 
     try {
-      const result = postAdd(formData);
+      const result = await postAdd(formData);
       console.log(result);
       setTestImageAdd({ ...initState });
+      // 커스텀 이벤트 발생 전에 잠시 지연
+
       navigate("/");
     } catch (error) {}
   }
