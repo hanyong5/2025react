@@ -16,3 +16,8 @@ export const getList = async (params) => {
   });
   return res.data;
 };
+
+export const postAdd = async (formData) => {
+  const res = await axios.post(prefix, formData);
+  return res.data;
+};

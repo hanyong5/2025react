@@ -6,7 +6,7 @@ import WriteComp from "./components/WriteComp";
 function App() {
   return (
     <>
-      <div className="container mx-auto flex justify-between py-4">
+      <div className="container mx-auto flex justify-between py-4 px-4">
         <h1>
           <Link to="/">로고</Link>
         </h1>
@@ -21,7 +21,7 @@ function App() {
           </ul>
         </nav>
       </div>
-      <div className="container mx-auto">
+      <div className="container mx-auto px-4">
         <Routes>
           <Route path="/" element={<ListComp />} />
           <Route path="/write" element={<WriteComp />} />
