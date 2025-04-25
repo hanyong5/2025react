@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import { postAdd } from "../api/testImageApi";
 import { useNavigate } from "react-router-dom";
+import { Map, MapMarker } from "react-kakao-maps-sdk";
 
 const initState = {
   title: "",
@@ -11,6 +12,12 @@ const initState = {
 
 function WriteComp() {
   const [testImageAdd, setTestImageAdd] = useState({ ...initState });
+  const [state, setState] = useState({
+    center: {
+      lat: 37.5031784,
+      lng: 126.8820367,
+    },
+  });
 
   // const [title, setTitle] = useState("");
   // const [name, setName] = useState("");
@@ -97,6 +104,86 @@ function WriteComp() {
         글작성하기
       </h3>
 
+      <div
+        className="mb-4"
+        style={{
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <Map // 지도를 표시할 Container
+          id="map"
+          center={state.center}
+          style={{
+            // 지도의 크기
+            width: "100%",
+            height: "350px",
+          }}
+          level={3} // 지도의 확대 레벨
+          className="mb-3"
+          onDragEnd={(e) => {
+            setState({
+              center: {
+                lat: e.getCenter().getLat(),
+                lng: e.getCenter().getLng(),
+              },
+            });
+          }}
+        >
+          <MapMarker // 마커를 생성합니다
+            position={{
+              // 마커가 표시될 위치입니다
+              lat: state.center.lat,
+              lng: state.center.lng,
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              zIndex: 100,
+              transform: "translate(-50%,-90%)",
+              fontSize: "2em",
+            }}
+          >
+            +
+          </div>
+        </Map>
+
+        <div className="flex gap-3">
+          <button
+            onClick={() => {
+              setState({
+                center: {
+                  lat: 37.555946,
+                  lng: 126.972317,
+                },
+              });
+            }}
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          >
+            서울역
+          </button>
+          <button
+            onClick={() => {
+              setState({
+                center: {
+                  lat: 37.5031784,
+                  lng: 126.8820367,
+                },
+              });
+            }}
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          >
+            구로역
+          </button>
+          <span>
+            현재위치 : {state.center.lat} / {state.center.lng}
+          </span>
+        </div>
+      </div>
+
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label htmlFor="title" className="block mb-3">
@@ -123,6 +210,24 @@ function WriteComp() {
             id="name"
             value={testImageAdd.name}
           />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="name" className="block mb-3">
+            <span className="text-red-500">*</span> 여행
+          </label>
+          <div className="flex">
+            <input
+              type="text"
+              name="tour"
+              onChange={handleChange}
+              className="border rounded w-full p-2"
+              id="name"
+              value={testImageAdd.tour}
+            />
+            <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+              추천여행지
+            </button>
+          </div>
         </div>
         <div className="mb-4">
           <label htmlFor="content" className="block mb-3">
