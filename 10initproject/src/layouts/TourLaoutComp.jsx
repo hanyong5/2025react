@@ -7,7 +7,7 @@ function TourLaoutComp({ children }) {
       <div className="bg-success">
         <BasicMenu />
       </div>
-      <div className="h-[200px] bg-gray-300 flex justify-center items-center">
+      <div className="h-[200px] bg-primary text-white flex justify-center items-center">
         tour layout 입니다.
       </div>
       <div className="container mx-auto">{children}</div>
