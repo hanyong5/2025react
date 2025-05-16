@@ -37,6 +37,22 @@ function BasicMenu() {
             </span>
           </div>
         </li>
+        <li className="relative group">
+          <Link
+            to={"/test"}
+            className={`${
+              location.pathname.startsWith("/test") ? "text-blue-700" : ""
+            }`}
+          >
+            Test
+          </Link>
+          <div className="absolute hidden group-hover:block bg-blue-300 p-2 rounded w-[120px] left-[-60px]">
+            <span className="flex gap-3">
+              <Link to="/test/list">리스트</Link>
+              <Link to="/test/write">글쓰기</Link>
+            </span>
+          </div>
+        </li>
       </ul>
     </nav>
   );

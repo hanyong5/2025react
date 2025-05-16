@@ -2,7 +2,9 @@ import { createBrowserRouter } from "react-router-dom";
 import MainPageComp from "../pages/MainPageComp";
 import AboutPageComp from "../pages/AboutPageComp";
 import IndexPageComp from "../pages/tour/IndexPageComp";
+import TestIndexPageComp from "../pages/test/TestIndexPageComp";
 import tourRouter from "./tourRouter";
+import testRouter from "./testRouter";
 
 const root = createBrowserRouter([
   {
@@ -18,11 +20,11 @@ const root = createBrowserRouter([
     element: <IndexPageComp />,
     children: tourRouter(),
   },
-  //   {
-  //     path:"/food",
-  //     element:<FoodIndexPageComp />,
-  //     children:foodRouter()
-  //   }
+  {
+    path: "/test",
+    element: <TestIndexPageComp />,
+    children: testRouter(),
+  },
 ]);
 
 export default root;
