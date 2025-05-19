@@ -22,22 +22,29 @@ function TestListComp() {
 
   return (
     <>
-      <h3 className="text-2xl font-bold py-4 border-b-2 border-gray-300">
+      <h3 className="text-2xl font-bold py-4 border-b-2 border-gray-300 mb-3">
         글리스트
       </h3>
-      <div className="">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
         {serverData.content &&
           serverData.content.map((item, i) => {
             return (
               <>
                 <div
+                  className="bg-gray-200 rounded shadow-xl border-4 border-blue-300"
                   onClick={() => {
                     // navigate("/test/view/${}")
                     // navigate(`/test/view/${item.id}/comment/${item.title}`);
                     navigate(`/test/view/${item.id}`);
                   }}
                 >
-                  {item.title}
+                  <div className="w-full h-[200px] md:h-[100px] bg-blue-400 flex justify-center items-center">
+                    test
+                  </div>
+                  <div className="p-4">
+                    <h4 className="text-lg font-bold ">{item.title}</h4>
+                    <p className="text-gray-700 text-sm ">{item.name}</p>
+                  </div>
                 </div>
               </>
             );

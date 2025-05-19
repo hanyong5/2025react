@@ -10,7 +10,7 @@ function TestLayoutComp({ children }) {
       <div className="h-[200px] bg-gray-300 flex justify-center items-center">
         test board
       </div>
-      <div className="container mx-auto">{children}</div>
+      <div className="container mx-auto px-4 md:px-0">{children}</div>
     </>
   );
 }
