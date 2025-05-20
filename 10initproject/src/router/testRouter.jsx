@@ -2,6 +2,7 @@ import { Navigate } from "react-router-dom";
 import TestListComp from "../pages/test/TestListComp";
 import TestWriteComp from "../pages/test/TestWriteComp";
 import TestViewComp from "../pages/test/TestViewComp";
+import TestModiComp from "../pages/test/TestModiComp";
 
 function testRouter() {
   return [
@@ -20,6 +21,10 @@ function testRouter() {
     {
       path: "view/:tno",
       element: <TestViewComp />,
+    },
+    {
+      path: "modi/:tno",
+      element: <TestModiComp />,
     },
   ];
 }

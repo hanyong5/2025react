@@ -23,7 +23,7 @@ function TestViewComp() {
           <Link to="/test/list">글리스트</Link>
         </button>
         <button className="bg-pink-500 px-4 py-2 rounded text-white font-bold text-xl hover:bg-pink-600">
-          글수정
+          <Link to={`/test/modi/${tno}`}>글수정</Link>
         </button>
       </div>
       <div>
