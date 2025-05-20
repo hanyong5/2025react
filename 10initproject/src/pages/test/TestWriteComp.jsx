@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { postAdd } from "../../api/testApi";
 
 const init = {
   title: "",
@@ -13,8 +14,48 @@ function TestWriteComp() {
   const [images, setImages] = useState([]);
   const [imagePreview, setImagePreview] = useState([]);
 
-  const handleSubmit = () => {
-    alert("글작성");
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!testImageAdd.title.trim()) {
+      alert("제목을 입력하세요");
+      document.querySelector("input[name='title']").focus();
+      return;
+    }
+    if (!testImageAdd.name.trim()) {
+      alert("이름을 입력하세요");
+      document.querySelector("input[name='name']").focus();
+      return;
+    }
+    if (!testImageAdd.content.trim()) {
+      alert("내용을 입력하세요");
+      document.querySelector("input[name='content']").focus();
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("title", testImageAdd.title);
+    formData.append("name", testImageAdd.name);
+    formData.append("content", testImageAdd.content);
+
+    images.forEach((file) => {
+      formData.append("files", file);
+    });
+
+    const result = await postAdd(formData);
+    console.log(result);
+
+    if (result.result == "success") {
+      alert("글작성이 완료됐습니다.");
+      setTestImageAdd({ ...init });
+      setImages([]);
+      setFileName("이미지 파일업로드");
+      setImagePreview([]);
+
+      navigate("/test/list");
+    }
   };
 
   const handleChange = (e) => {
@@ -43,12 +84,36 @@ function TestWriteComp() {
 
     setImagePreview(newPreviews);
 
+    setFileName(
+      newImages.length > 0
+        ? `${newImages.length}개의 이미지 선택 됨`
+        : "이미지 파일업로드"
+    );
+
+    e.target.value = "";
+
     // const reader = new FileReader();
     // reader.readAsDataURL(files[0]);
 
     // reader.onload = () => {
     //   console.log(reader.result);
     // };
+  };
+
+  const handleRemoveImage = (idx) => {
+    const newFiles = images.filter((_, i) => i !== idx);
+    const newPreviews = imagePreview.filter((_, i) => {
+      return i !== idx;
+    });
+
+    setImages(newFiles);
+    setImagePreview(newPreviews);
+
+    setFileName(
+      newFiles.length > 0
+        ? `${newFiles.length}개의 이미지 선택 됨`
+        : "이미지 파일업로드"
+    );
   };
 
   return (
@@ -58,7 +123,7 @@ function TestWriteComp() {
       </h3>
 
       <div className="">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} action="test.java">
           <div className="flex items-center mb-3">
             <label htmlFor="title" className="w-[100px]">
               <span className="text-red-500">*</span> 제목
@@ -69,6 +134,7 @@ function TestWriteComp() {
               onChange={handleChange}
               id="title"
               className="border rounded-sm p-2 w-full"
+              value={testImageAdd.title}
             />
           </div>
           <div> {testImageAdd?.title}</div>
@@ -82,6 +148,7 @@ function TestWriteComp() {
               onChange={handleChange}
               id="name"
               className="border rounded-sm p-2 w-full"
+              value={testImageAdd.name}
             />
           </div>
           <div> {testImageAdd?.name}</div>
@@ -94,6 +161,7 @@ function TestWriteComp() {
               id="content"
               onChange={handleChange}
               className="border rounded w-full h-[200px]"
+              value={testImageAdd.content}
             ></textarea>
           </div>
           {/* <div className="flex items-center">
@@ -124,12 +192,21 @@ function TestWriteComp() {
           <div className="flex gap-3 mb-4 flex-wrap">
             {imagePreview.map((item, i) => {
               return (
-                <div className="w-[100px] h-[100px] ">
+                <div className="w-[100px] h-[100px] relative">
                   <img
                     src={item}
                     alt=""
                     className="w-[100px] h-[100px] object-cover rounded"
                   />
+                  <button
+                    type="button"
+                    className="absolute top-1 right-2"
+                    onClick={() => {
+                      handleRemoveImage(i);
+                    }}
+                  >
+                    X
+                  </button>
                 </div>
               );
             })}
