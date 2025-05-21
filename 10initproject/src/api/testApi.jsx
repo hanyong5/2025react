@@ -19,4 +19,8 @@ export const getOne = async (tno) => {
   return res.data;
 };
 
-export const putOne = () => {};
+export const putOne = async (tno, formData) => {
+  const header = { headers: { "Content-Type": "multipart/form-data" } };
+  const res = await axios.put(`${prefix}update/${tno}`, formData, header);
+  return res.data;
+};
