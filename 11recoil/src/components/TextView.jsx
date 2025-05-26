@@ -12,9 +12,8 @@ function TextView() {
       TextView
       <div>{text}</div>
       <button
-        onClick={() => {
-          return setNum(num + 1);
-        }}
+        onClick={() => setNum(num + 1)}
+        className="bg-pink-400 rounded px-2 text-sm text-white py-1"
       >
         증가
       </button>

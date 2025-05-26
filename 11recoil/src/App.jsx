@@ -1,14 +1,9 @@
 import React from "react";
-import TextInput from "./components/TextInput";
-import TextView from "./components/TextView";
+import { RouterProvider } from "react-router-dom";
+import root from "./router/root";
 
 function App() {
-  return (
-    <div className=" container m-auto bg-blue-200">
-      <TextInput />
-      <TextView />
-    </div>
-  );
+  return <RouterProvider router={root} />;
 }
 
 export default App;
