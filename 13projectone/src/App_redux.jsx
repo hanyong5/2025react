@@ -8,8 +8,11 @@ const init = {
   nickname: "",
 };
 
+// 3
 const reducer = (state = init, action) => {
   console.log(state, action);
+
+  // dispatch 7
   switch (action.type) {
     case "add":
       return {
@@ -27,8 +30,10 @@ const reducer = (state = init, action) => {
   }
 };
 
+// 2
 const store = createStore(reducer);
 
+// 1
 function App() {
   return (
     <Provider store={store}>
@@ -39,6 +44,7 @@ function App() {
 }
 
 function Counter() {
+  // 4 구독
   const count = useSelector((state) => {
     return state.value;
   });
@@ -64,6 +70,7 @@ function CounterChild() {
     return state.value;
   });
 
+  // 5
   const dispatch = useDispatch();
   return (
     <>
@@ -72,6 +79,7 @@ function CounterChild() {
         <p>
           {email} / {num}
         </p>
+        {/* 6 */}
         <button
           className="btn btn-primary"
           onClick={() => {
