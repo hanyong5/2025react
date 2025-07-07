@@ -1,17 +1,9 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { RouterProvider } from "react-router-dom";
+import router from "./routers/router";
 
 function App() {
-  const email = useSelector((state) => {
-    return state.loginSlice.email;
-  });
-
-  return (
-    <div>
-      <h2>사용자 정보</h2>
-      <p>이메일: {email}</p>
-    </div>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;
