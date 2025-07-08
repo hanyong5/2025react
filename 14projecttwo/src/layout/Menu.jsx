@@ -16,8 +16,9 @@ function Menu() {
           <Link to="/">home</Link>
         </li>
         <li>
-          <Link to="/about">about</Link>
+          <Link to="/company">company</Link>
         </li>
+
         {email ? (
           <li>
             <button className="btn btn-sm">로그아웃</button>
