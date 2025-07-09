@@ -25,7 +25,9 @@ function Menu() {
           </li>
         ) : (
           <li>
-            <button className="btn btn-sm">로그인</button>
+            <Link className="btn btn-sm" to="/member/login">
+              로그인
+            </Link>
           </li>
         )}
       </ul>
