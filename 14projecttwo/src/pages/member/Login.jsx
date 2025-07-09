@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../slices/loginSlice";
 
 const init = {
@@ -12,6 +12,7 @@ function Login() {
   const [loginParam, setLoginParam] = useState({ ...init });
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,6 +24,7 @@ function Login() {
     e.preventDefault();
     console.log(loginParam);
     dispatch(login(loginParam));
+    navigate("/");
   };
 
   return (
