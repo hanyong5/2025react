@@ -12,6 +12,7 @@ const loginSlice = createSlice({
   reducers: {
     login: (state, action) => {
       console.log("login....");
+      console.log(action);
     },
 
     logout: (state, action) => {
