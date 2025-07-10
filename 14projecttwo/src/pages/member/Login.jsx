@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../slices/loginSlice";
+import { loginPost } from "../../api/memberApi";
 
 const init = {
   email: "",
@@ -23,8 +24,12 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(loginParam);
-    dispatch(login(loginParam));
-    navigate("/");
+    // dispatch(login(loginParam));
+    // navigate("/");
+
+    loginPost(loginParam).then((res) => {
+      console.log(res);
+    });
   };
 
   return (
