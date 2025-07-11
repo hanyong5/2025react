@@ -32,6 +32,13 @@ function Login() {
     // });
 
     const action = await dispatch(loginPostAsync(loginParam));
+    const data = action.payload;
+    if (data?.error) {
+      alert("이메일과 패스워드를 다시 확인하세요");
+    } else {
+      alert("로그인성공");
+      navigate("/");
+    }
   };
 
   return (
