@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../../slices/loginSlice";
+import { login, loginPostAsync } from "../../slices/loginSlice";
 import { loginPost } from "../../api/memberApi";
 
 const init = {
@@ -21,15 +21,17 @@ function Login() {
     setLoginParam({ ...loginParam, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(loginParam);
     // dispatch(login(loginParam));
     // navigate("/");
 
-    loginPost(loginParam).then((res) => {
-      console.log(res);
-    });
+    // loginPost(loginParam).then((res) => {
+    //   console.log(res);
+    // });
+
+    const action = await dispatch(loginPostAsync(loginParam));
   };
 
   return (
