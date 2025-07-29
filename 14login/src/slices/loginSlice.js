@@ -37,6 +37,7 @@ const loginSlice = createSlice({
       state.email = "";
       state.nickname = "";
       state.userid = 0;
+      window.location.href = "/";
     },
   },
   extraReducers: (builder) => {

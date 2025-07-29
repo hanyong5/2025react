@@ -1,0 +1,15 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@theme static {
+  --color-mint-500: oklch(0.72 0.11 178);
+  --color-purple: #3f3cbb;
+
+  --color-primary: var(--color-red-500);
+  --color-secondary: var(--color-blue-500);
+}
+
+/* body {
+  max-width: 900px;
+  margin: 0 auto;
+} */

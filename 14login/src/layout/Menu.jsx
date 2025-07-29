@@ -23,6 +23,9 @@ function Menu() {
         <li>
           <Link to="/company">company</Link>
         </li>
+        <li>
+          <Link to="/company/history">history</Link>
+        </li>
 
         {email ? (
           <li>

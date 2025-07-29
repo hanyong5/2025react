@@ -11,17 +11,17 @@ const companyRoutes = [
   {
     path: "about",
     element: (
-      <RequireAuth>
-        <About />
-      </RequireAuth>
+      // <RequireAuth>
+      <About />
+      // </RequireAuth>
     ),
   },
   {
     path: "history",
     element: (
-      <RequireAuth>
-        <History />
-      </RequireAuth>
+      // <RequireAuth>
+      <History />
+      // </RequireAuth>
     ),
   },
 ];
